@@ -1,23 +1,23 @@
-import logo from './logo.svg';
-import './App.css';
+import "./App.css";
+import Create from "./components/Create";
+import Read from "./components/Read";
+
+import { useState } from "react";
 
 function App() {
+  const [flag, setFlag] = useState(false);
+  const [apiData, setApiData] = useState([]);
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div className="container">
+      <h1>CRUD Opeartion Using Axios</h1>
+      <div className="main">
+        <div>
+          <Create flag={flag} apiData={apiData} setApiData={setApiData} />
+        </div>
+        <div>
+          <Read setFlag={setFlag} apiData={apiData} setApiData={setApiData} />{" "}
+        </div>
+      </div>
     </div>
   );
 }
