@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import { Button, Checkbox, Form } from "semantic-ui-react";
 import axios from "axios";
 import Update from "./Update";
@@ -7,8 +7,12 @@ const Create = ({ flag, apiData, setApiData }) => {
   const [firstName, setFirstName] = useState("");
   const [lastName, setLastName] = useState("");
   const [checkbox, setCheckbox] = useState(false);
+  const firstNameRef = useRef(null);
+  useEffect(() => {
+    firstNameRef.current.focus();
+  }, []);
 
-  const postData = (event) => {   
+  const postData = (event) => {
     axios
       .post("https://61ea3a257bc0550017bc65e1.mockapi.io/axios", {
         firstName,
@@ -18,12 +22,12 @@ const Create = ({ flag, apiData, setApiData }) => {
       .then((res) => {
         setApiData([...apiData, res.data]);
       });
-      setFirstName("");
-      setLastName("");
-      setCheckbox(false);
+    setFirstName("");
+    setLastName("");
+    setCheckbox(false);
   };
   if (flag) {
-    return <Update apiData={apiData} setApiData={setApiData}/>;
+    return <Update apiData={apiData} setApiData={setApiData} />;
   }
   return (
     <Form className="form">
@@ -31,6 +35,7 @@ const Create = ({ flag, apiData, setApiData }) => {
         <label>First Name</label>
         <input
           placeholder="First Name"
+          ref={firstNameRef}
           onChange={(e) => {
             setFirstName(e.target.value);
           }}
