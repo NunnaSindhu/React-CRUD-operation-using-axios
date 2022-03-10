@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useEffect } from "react";
 import axios from "axios";
 import { Table, Button } from "semantic-ui-react";
 
@@ -10,7 +10,7 @@ export default function Read({ setFlag,apiData,setApiData }) {
     axios.get("https://61ea3a257bc0550017bc65e1.mockapi.io/axios")
       .then((response) => setApiData(response.data))
       .catch((e) => console.log(e));
-  }, []);
+  }, [setApiData]);
   console.log(apiData);
 
   const getData = () => {
